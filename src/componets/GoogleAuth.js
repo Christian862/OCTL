@@ -16,7 +16,6 @@ class GoogleAuth extends React.Component {
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
-          console.log(window.gapi);
           this.onAuthChange(this.auth.isSignedIn.get());
           // this.auth.isSignedIn object 'inherits'/has the __proto__ attribute with a method called listen
           // it takes a callback to execute when this.auth.isSignedIn changes.

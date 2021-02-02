@@ -1,18 +1,32 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable class-methods-use-this */
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import Modal from '../Modal';
 
+import { createBoard } from '../../actions';
+
 class CreateBoard extends React.Component {
   state = { boardName: '' };
+
+  handleSubmit = () => {
+    const { createBoard } = this.props;
+    const { boardName } = this.state;
+
+    createBoard(boardName);
+  };
 
   renderActions() {
     return (
       // React fragment shorthand syntax
       <>
-        <button type="button" className="ui button negative">
+        <button
+          onClick={this.handleSubmit}
+          type="button"
+          className="ui teal button"
+        >
           Create
         </button>
         <Link to="/" className="ui button">
@@ -28,8 +42,10 @@ class CreateBoard extends React.Component {
     return (
       <div className="ui form">
         <div className="field">
-          <label>Board Title</label>
+          <label>Title</label>
           <input
+            type="text"
+            placeholder="Title of your new board..."
             value={boardName}
             onChange={(e) => {
               return this.setState({ boardName: e.target.value });
@@ -54,4 +70,4 @@ class CreateBoard extends React.Component {
   }
 }
 
-export default CreateBoard;
+export default connect(null, { createBoard })(CreateBoard);

@@ -4,7 +4,7 @@ import history from '../history';
 
 import MainNav from './MainNav';
 import BoardView from './BoardView';
-import CreateBoard from './Boards/CreateBoard';
+import BoardCreate from './Boards/BoardCreate';
 
 const App = () => {
   return (
@@ -12,8 +12,8 @@ const App = () => {
       <Router history={history}>
         <MainNav />
         <Switch>
-          <Route path="/" exact component={BoardView} />
-          <Route path="/board/new" exact component={CreateBoard} />
+          <Route path="/:id" exact component={BoardView} />
+          <Route path="/board/new" exact component={BoardCreate} />
         </Switch>
       </Router>
     </div>
