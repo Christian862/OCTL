@@ -1,7 +1,12 @@
 /* eslint-disable no-case-declarations */
 import _ from 'lodash';
 import { combineReducers } from 'redux';
-import { CREATE_BOARD, FETCH_BOARDS } from '../actions/types';
+import {
+  CREATE_BOARD,
+  FETCH_BOARDS,
+  FETCH_BOARD,
+  EDIT_BOARD,
+} from '../actions/types';
 
 function addBoard(state, action) {
   const { boardId } = action.payload;
@@ -18,6 +23,10 @@ const boardsById = (state = {}, action) => {
       return addBoard(state, action);
     case FETCH_BOARDS:
       return { ...state, ..._.mapKeys(action.payload, 'boardId') };
+    case FETCH_BOARD:
+      return { ...state, [action.payload.boardId]: action.payload };
+    case EDIT_BOARD:
+      return { ...state, [action.payload.boardId]: action.payload };
     default:
       return state;
   }
@@ -29,6 +38,12 @@ const allBoards = (state = [], action) => {
       return state.concat(action.payload.boardId);
     case FETCH_BOARDS:
       return _.map(action.payload, 'boardId');
+    case FETCH_BOARD:
+      if (state.indexOf(action.payload.boardId) === -1) {
+        return state.concat(action.payload.boardId);
+      } else {
+        return state;
+      }
     default:
       return state;
   }

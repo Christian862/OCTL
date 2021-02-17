@@ -47,9 +47,7 @@ class CreateBoard extends React.Component {
             type="text"
             placeholder="Title of your new board..."
             value={boardName}
-            onChange={(e) => {
-              return this.setState({ boardName: e.target.value });
-            }}
+            onChange={(e) => this.setState({ boardName: e.target.value })}
           />
         </div>
       </div>
@@ -62,9 +60,7 @@ class CreateBoard extends React.Component {
         title="New Board"
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => {
-          return history.push('/');
-        }}
+        onDismiss={() => history.push('/')}
       />
     );
   }

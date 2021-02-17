@@ -1,12 +1,15 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import '../../Styles/Dropdown.css';
 
-const Dropdown = ({ options, onSelectedChange }) => {
+const BoardDropdown = ({ options }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
-  // if click originated from dropdown elements, do nothing. (i.e. keeps dropdown open)
+  // if click originated fromBoardDropdown elements, do nothing. (i.e. keepsBoardDropdown open)
   useEffect(() => {
     const onBodyClick = (event) => {
       if (ref.current && ref.current.contains(event.target)) {
@@ -25,37 +28,35 @@ const Dropdown = ({ options, onSelectedChange }) => {
 
   const renderedOptions = options.map((option) => {
     return (
-      <div
-        onClick={() => {
-          return onSelectedChange(option);
-        }}
+      <Link
+        to={`/${option.boardId}`}
+        onClick={() => setOpen(!open)}
         key={option.boardId}
-        className="item"
+        className="boardOption"
       >
         {option.boardTitle}
-      </div>
+      </Link>
     );
   });
 
   return (
-    <div ref={ref} className="ui form">
-      <div className="field">
-        <div
-          onClick={() => {
-            return setOpen(!open);
-          }}
-          className={`ui dropdown ${open ? 'visible active' : ''}`}
-        >
-          <div className="ui button">
-            <div className="text">Boards</div>
-            <div className={`menu ${open ? 'visible transition' : ''}`}>
-              {renderedOptions}
-            </div>
-          </div>
-        </div>
+    <div ref={ref} className="dropdown">
+      <div
+        onClick={() => {
+          setOpen(!open);
+        }}
+        className="ui button"
+      >
+        Boards
+      </div>
+      <div
+        id="boardDropdown"
+        className={`dropdown-content ${open ? 'show' : ''}`}
+      >
+        {renderedOptions}
       </div>
     </div>
   );
 };
 
-export default Dropdown;
+export default BoardDropdown;

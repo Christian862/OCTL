@@ -5,30 +5,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchBoards } from '../actions';
 import GoogleAuth from './GoogleAuth';
-import Dropdown from './Dropdown';
+import BoardDropdown from './Boards/BoardDropdown';
+import '../Styles/MainNav.css';
 
 class MainNav extends React.Component {
   componentDidMount() {
     this.props.fetchBoards();
   }
 
-  onSelectedChange(selectedBoard) {
-    console.log(selectedBoard);
-  }
-
   renderBoardsDropdown() {
     if (!this.props.boards) {
       return <div>Loading</div>;
     }
-    return (
-      <Dropdown
-        options={this.props.boards}
-        onSelectedChange={this.onSelectedChange}
-      />
-    );
+    return <BoardDropdown options={this.props.boards} />;
   }
 
-  renderNewBoard() {
+  renderNewBoardButton() {
     return (
       <div className="item">
         <Link to="/board/new" className="ui button">
@@ -49,7 +41,7 @@ class MainNav extends React.Component {
           </div>
         </div>
         <div className="right menu">
-          {this.renderNewBoard()}
+          {this.renderNewBoardButton()}
           <GoogleAuth />
         </div>
       </div>
@@ -57,10 +49,9 @@ class MainNav extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
   // convert back to array for easy component operation
-  return {
+  ({
     boards: Object.values(state.boards.byId),
-  };
-};
+  });
 export default connect(mapStateToProps, { fetchBoards })(MainNav);

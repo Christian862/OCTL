@@ -31,10 +31,6 @@
         "destructuring": "all"
       }
     ],
-    "arrow-body-style": [
-      2,
-      "always"
-    ],
     "no-unused-expressions": [
       2,
       {

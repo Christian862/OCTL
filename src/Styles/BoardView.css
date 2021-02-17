@@ -1,0 +1,36 @@
+
+#board-container {
+  padding: 2px 13px;
+  display: inline-block;
+}
+
+.ui.labeled.icon.button>.icon {
+  background-color: inherit;
+}
+
+
+.ui.labeled.icon.button {
+  display: inline-block;
+  width: 272px;
+  padding-left: 2.5rem!important;
+  text-align: left;
+  vertical-align: top;
+}
+
+.list-wrapper {
+  display: inline-block;
+  width: 272px;
+  margin: 0 4px;
+  margin-left: auto;
+}
+
+.list {
+  padding: 11px 21px;
+  height: 36px;
+  border: 0px solid #cacbcd;
+  border-radius: .28571429rem;
+  background-color: #cacbcd;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica;
+  color: rgba(0,0,0,.6);
+  font-weight: 700;
+}
