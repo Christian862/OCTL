@@ -1,0 +1,25 @@
+
+input[type=text] {
+  text-align: center;
+  height: 36px;
+  padding: 11px 21px;
+  border: 0px solid #cacbcd;
+  border-radius: .28571429rem;
+  background-color: #cacbcd;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica;
+  color: rgba(0,0,0,.6);
+  font-weight: 1000;
+  
+}
+
+input[type=text]:hover {
+  background-color: #e0e1e2;
+}
+
+input[type=text]:focus {
+  background-color: white;
+}
+
+input[type=text]::selection {
+  background-color: rgb(160, 221, 230);
+}
