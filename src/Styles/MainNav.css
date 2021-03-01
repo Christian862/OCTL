@@ -1,3 +1,5 @@
 div.ui.secondary.menu {
+  box-sizing: border-box;
   margin-bottom: 0;
+  margin-top: 0;
 }

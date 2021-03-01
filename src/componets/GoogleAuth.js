@@ -68,7 +68,7 @@ class GoogleAuth extends React.Component {
   }
 
   render() {
-    return <div>{this.renderAuthButton()} </div>;
+    return this.renderAuthButton();
   }
 }
 

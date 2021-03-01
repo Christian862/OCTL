@@ -15,7 +15,7 @@ class MainNav extends React.Component {
 
   renderBoardsDropdown() {
     if (!this.props.boards) {
-      return <div>Loading</div>;
+      return <div>Loading...</div>;
     }
     return <BoardDropdown options={this.props.boards} />;
   }

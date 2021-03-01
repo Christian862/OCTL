@@ -2,25 +2,20 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchBoard } from '../../actions';
+import { fetchBoard, createList } from '../../actions';
 import BoardNav from './BoardNav';
+import List from '../Lists/List';
 
 import '../../Styles/BoardView.css';
 
 class BoardView extends React.Component {
-  state = {
-    lists: [],
-  };
-
   componentDidMount() {
     const { match } = this.props;
     this.props.fetchBoard(match.params.id);
   }
 
   handleClick = () => {
-    this.setState((prevState) => ({
-      lists: prevState.lists.concat(['Enter list title...']),
-    }));
+    this.props.createList('Enter list title...', this.props.board.boardId);
   };
 
   renderNewListButton() {
@@ -37,10 +32,8 @@ class BoardView extends React.Component {
   }
 
   renderLists() {
-    return this.state.lists.map((item) => (
-      <div className="list-wrapper">
-        <div className="list">{item}</div>
-      </div>
+    return this.props.board.lists.map((listId) => (
+      <List key={listId} listId={listId} />
     ));
   }
 
@@ -60,11 +53,22 @@ class BoardView extends React.Component {
   }
 
   render() {
-    return <div>{this.renderBoard()}</div>;
+    if (!this.props.board) {
+      return <div>Loading...</div>;
+    }
+    return (
+      <div className="board-view">
+        <BoardNav board={this.props.board} />
+        <div className="board-wrapper">
+          {this.renderLists()}
+          {this.renderNewListButton()}
+        </div>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
   board: state.boards.byId[ownProps.match.params.id],
 });
-export default connect(mapStateToProps, { fetchBoard })(BoardView);
+export default connect(mapStateToProps, { fetchBoard, createList })(BoardView);

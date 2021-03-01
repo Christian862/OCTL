@@ -1,5 +1,5 @@
 
-input[type=text] {
+.board-title {
   text-align: center;
   height: 36px;
   padding: 11px 21px;
@@ -12,14 +12,20 @@ input[type=text] {
   
 }
 
-input[type=text]:hover {
+.board-title:hover {
   background-color: #e0e1e2;
 }
 
-input[type=text]:focus {
+.board-title:focus {
   background-color: white;
 }
 
-input[type=text]::selection {
+.board-title::selection {
   background-color: rgb(160, 221, 230);
+}
+
+div.ui.secondary.menu {
+  box-sizing: border-box;
+  margin-bottom: 0;
+  margin-top: 0;
 }

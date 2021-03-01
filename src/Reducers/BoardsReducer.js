@@ -6,6 +6,7 @@ import {
   FETCH_BOARDS,
   FETCH_BOARD,
   EDIT_BOARD,
+  CREATE_LIST,
 } from '../actions/types';
 
 function addBoard(state, action) {
@@ -18,15 +19,25 @@ function addBoard(state, action) {
 }
 
 const boardsById = (state = {}, action) => {
+  const { payload } = action;
   switch (action.type) {
     case CREATE_BOARD:
       return addBoard(state, action);
     case FETCH_BOARDS:
-      return { ...state, ..._.mapKeys(action.payload, 'boardId') };
+      return { ...state, ..._.mapKeys(payload, 'boardId') };
     case FETCH_BOARD:
-      return { ...state, [action.payload.boardId]: action.payload };
+      return { ...state, [payload.boardId]: payload };
     case EDIT_BOARD:
-      return { ...state, [action.payload.boardId]: action.payload };
+      return { ...state, [payload.boardId]: payload };
+    case CREATE_LIST:
+      const { boardId } = action;
+      return {
+        ...state,
+        [action.boardId]: {
+          ...state[action.boardId],
+          lists: state[boardId].lists.concat(payload.listId),
+        },
+      };
     default:
       return state;
   }
