@@ -7,6 +7,9 @@ import {
   FETCH_BOARDS,
   FETCH_BOARD,
   EDIT_BOARD,
+  CREATE_LIST,
+  FETCH_LIST,
+  EDIT_LIST,
 } from './types';
 import boards from '../apis/boards';
 import history from '../history';
@@ -24,11 +27,13 @@ export const signOut = () => {
   };
 };
 
+// #### BOARDS ####
 export const createBoard = (title) => {
   return async (dispatch) => {
     const response = await boards.post('/boards', {
       boardId: v4(),
       boardTitle: title,
+      lists: [],
     });
 
     dispatch({ type: CREATE_BOARD, payload: response.data });
@@ -54,7 +59,41 @@ export const fetchBoard = (id) => {
 export const editBoard = (id, values) => {
   return async (dispatch) => {
     const response = await boards.patch(`/boards/${id}`, values);
-    console.log('AC ', response);
     dispatch({ type: EDIT_BOARD, payload: response.data });
+  };
+};
+
+// #### LISTS ####
+
+export const createList = (title, boardId) => {
+  return async (dispatch, getState) => {
+    const response = await boards.post('/lists', {
+      listId: v4(),
+      listTitle: title,
+    });
+
+    // get current board and send updated list to server.
+    const board = getState().boards.byId[boardId];
+    await boards.patch(`/boards/${board.id}`, {
+      lists: board.lists.concat(response.data.listId),
+    });
+
+    dispatch({ type: CREATE_LIST, payload: response.data, boardId });
+  };
+};
+
+export const fetchList = (listId) => {
+  return async (dispatch) => {
+    const response = await boards.get(`/lists?listId=${listId}`);
+    dispatch({ type: FETCH_LIST, payload: response.data[0] });
+  };
+};
+
+export const editList = (id, values) => {
+  return async (dispatch) => {
+    const response = await boards.patch(`/lists/${id}`, values);
+    console.log('AC res: ', response);
+
+    dispatch({ type: EDIT_LIST, payload: response.data });
   };
 };

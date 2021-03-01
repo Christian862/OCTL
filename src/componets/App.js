@@ -7,7 +7,7 @@ import BoardView from './Boards/BoardView';
 import BoardCreate from './Boards/BoardCreate';
 
 const App = () => (
-  <div>
+  <div id="app">
     <Router history={history}>
       <MainNav />
       <Switch>

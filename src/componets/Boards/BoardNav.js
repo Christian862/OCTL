@@ -20,6 +20,7 @@ const BoardNav = ({ board }) => {
   };
   const renderTitle = () => (
     <input
+      className="board-title"
       type="text"
       value={titleInput}
       size={titleInput.length}
