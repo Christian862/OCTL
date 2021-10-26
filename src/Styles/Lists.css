@@ -2,9 +2,8 @@
 .list-wrapper {
   display: inline-block;
   width: 272px;
-  height: 100%;
-  margin: 0 4px;
-  margin-left: auto;
+  /* height: 100%; */
+  margin-right: 5px;
 
 }
 
@@ -13,6 +12,8 @@
   border: 0px solid #cacbcd;
   border-radius: .28571429rem;
   background-color: #cacbcd;
+  white-space: normal;
+  width: inherit;
 }
 
 .list-title {
@@ -45,7 +46,7 @@
   display: block;
   width: 80%;
   padding: 7px 11px;
-  padding-left: 2.5rem!important;
+  padding-left: 2.6rem!important;
   margin-top: 10px;
   background-color: #cacbcd;
 }

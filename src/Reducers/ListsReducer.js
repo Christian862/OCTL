@@ -1,5 +1,12 @@
+/* eslint-disable no-case-declarations */
+
 import { combineReducers } from 'redux';
-import { CREATE_LIST, FETCH_LIST, EDIT_LIST } from '../actions/types';
+import {
+  CREATE_LIST,
+  FETCH_LIST,
+  EDIT_LIST,
+  CREATE_CARD,
+} from '../actions/types';
 
 const listsById = (state = {}, action) => {
   const { payload } = action;
@@ -11,6 +18,15 @@ const listsById = (state = {}, action) => {
       return { ...state, [payload.listId]: payload };
     case EDIT_LIST:
       return { ...state, [payload.listId]: payload };
+    case CREATE_CARD:
+      const { listId } = action;
+      return {
+        ...state,
+        [action.listId]: {
+          ...state[action.listId],
+          cards: state[listId].cards.concat(payload.cardId),
+        },
+      };
     default:
       return state;
   }
@@ -18,7 +34,6 @@ const listsById = (state = {}, action) => {
 
 const allLists = (state = [], action) => {
   const { payload } = action;
-
   switch (action.type) {
     case CREATE_LIST:
       return state.concat(payload.listId);
