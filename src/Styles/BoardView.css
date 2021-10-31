@@ -4,7 +4,7 @@
 
 .board-wrapper {
   padding: 0 13px;
-  display: inline-block;
+  display: flex;
   box-sizing: border-box;
   width: 100%;
   height: calc(100vh - 88px);
@@ -20,8 +20,9 @@
 .ui.labeled.icon.button {
   display: inline-block;
   width: 272px;
-  padding-left: 2.5rem!important;
+  padding-left: 2.7rem!important;
   margin-top: 0;
   text-align: left;
   vertical-align: top;
+  height: fit-content;
 }
