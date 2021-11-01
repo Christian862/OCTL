@@ -3,16 +3,16 @@ import { v4 } from 'uuid';
 import {
   SIGN_IN,
   SIGN_OUT,
-  CREATE_BOARD,
-  FETCH_BOARDS,
-  FETCH_BOARD,
-  EDIT_BOARD,
-  CREATE_LIST,
-  FETCH_LIST,
-  EDIT_LIST,
   CREATE_CARD,
+  CREATE_PROPERTY,
+  FETCH_PROPERTIES,
+  FETCH_PROPERTY,
+  EDIT_PROPERTY,
+  CREATE_UNIT,
+  FETCH_UNIT,
+  EDIT_UNIT,
 } from './types';
-import boards from '../apis/boards';
+import properties from '../apis/properties';
 import history from '../history';
 
 export const signIn = (userId) => {
@@ -28,91 +28,91 @@ export const signOut = () => {
   };
 };
 
-// #### BOARDS ####
-export const createBoard = (title) => {
+// #### properties ####
+export const createProperty = (title) => {
   return async (dispatch) => {
-    const response = await boards.post('/boards', {
-      boardId: v4(),
-      boardTitle: title,
-      lists: [],
+    const response = await properties.post('/properties', {
+      propertyId: v4(),
+      propertyTitle: title,
+      units: [],
     });
 
-    dispatch({ type: CREATE_BOARD, payload: response.data });
-    history.push(`/${response.data.boardId}`);
+    dispatch({ type: CREATE_PROPERTY, payload: response.data });
+    history.push(`/${response.data.propertyId}`);
   };
 };
 
-export const fetchBoards = () => {
+export const fetchProperties = () => {
   return async (dispatch) => {
-    const response = await boards.get('/boards');
+    const response = await properties.get('/properties');
 
-    dispatch({ type: FETCH_BOARDS, payload: response.data });
+    dispatch({ type: FETCH_PROPERTIES, payload: response.data });
   };
 };
 
-export const fetchBoard = (id) => {
+export const fetchProperty = (id) => {
   return async (dispatch) => {
-    const response = await boards.get(`/boards?boardId=${id}`);
-    dispatch({ type: FETCH_BOARD, payload: response.data[0] });
+    const response = await properties.get(`/properties?propertyId=${id}`);
+    dispatch({ type: FETCH_PROPERTY, payload: response.data[0] });
   };
 };
 
-export const editBoard = (id, values) => {
+export const editProperty = (id, values) => {
   return async (dispatch) => {
-    const response = await boards.patch(`/boards/${id}`, values);
-    dispatch({ type: EDIT_BOARD, payload: response.data });
+    const response = await properties.patch(`/properties/${id}`, values);
+    dispatch({ type: EDIT_PROPERTY, payload: response.data });
   };
 };
 
-// #### LISTS ####
+// #### UNITS ####
 
-export const createList = (title, boardId) => {
+export const createUnit = (title, propertyId) => {
   return async (dispatch, getState) => {
-    const response = await boards.post('/lists', {
-      listId: v4(),
-      listTitle: title,
+    const response = await properties.post('/units', {
+      unitId: v4(),
+      unitTitle: title,
       cards: [],
     });
 
-    // get current board and send updated list to server.
-    const board = getState().boards.byId[boardId];
-    await boards.patch(`/boards/${board.id}`, {
-      lists: board.lists.concat(response.data.listId),
+    // get current property and send updated unit to server.
+    const property = getState().properties.byId[propertyId];
+    await properties.patch(`/properties/${property.id}`, {
+      units: property.units.concat(response.data.unitId),
     });
 
-    dispatch({ type: CREATE_LIST, payload: response.data, boardId });
+    dispatch({ type: CREATE_UNIT, payload: response.data, propertyId });
   };
 };
 
-export const fetchList = (listId) => {
+export const fetchUnit = (unitId) => {
   return async (dispatch) => {
-    const response = await boards.get(`/lists?listId=${listId}`);
-    dispatch({ type: FETCH_LIST, payload: response.data[0] });
+    const response = await properties.get(`/units?unitId=${unitId}`);
+    dispatch({ type: FETCH_UNIT, payload: response.data[0] });
   };
 };
 
-export const editList = (id, values) => {
+export const editUnit = (id, values) => {
   return async (dispatch) => {
-    const response = await boards.patch(`/lists/${id}`, values);
+    const response = await properties.patch(`/units/${id}`, values);
 
-    dispatch({ type: EDIT_LIST, payload: response.data });
+    dispatch({ type: EDIT_UNIT, payload: response.data });
   };
 };
 
 // #### CARDS ####
 
-export const createCard = (title, listId) => {
+export const createCard = (title, unitId) => {
   return async (dispatch, getState) => {
-    const response = await boards.post('/cards', {
+    const response = await properties.post('/cards', {
       cardId: v4(),
       cardTitle: title,
     });
 
-    const list = getState().lists.byId[listId];
-    const listResponse = await boards.patch(`/lists/${list.id}`, {
-      cards: list.cards.concat(response.data.cardId),
+    const unit = getState().units.byId[unitId];
+    const unitResponse = await properties.patch(`/units/${unit.id}`, {
+      cards: unit.cards.concat(response.data.cardId),
     });
 
-    dispatch({ type: CREATE_CARD, payload: response.data, listId });
+    dispatch({ type: CREATE_CARD, payload: response.data, unitId });
   };
 };

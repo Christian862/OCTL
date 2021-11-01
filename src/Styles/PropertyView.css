@@ -1,8 +1,8 @@
-.board-view {
+.property-view {
   height: calc(100vh - 44px);
 }
 
-.board-wrapper {
+.property-wrapper {
   padding: 0 13px;
   display: flex;
   box-sizing: border-box;

@@ -17,7 +17,7 @@ div.item{
   z-index: 1;
 }
 
-.boardOption{
+.propertyOption{
   color: rgba(0,0,0,.6);
   font-weight: 600;
   background-color: #e0e1e2;
@@ -28,7 +28,7 @@ div.item{
   border-radius: .28571429rem;
 }
 
-.boardOption:hover { 
+.propertyOption:hover {
   background-color: #cacbcd;
   color: rgba(0,0,0,.6);
 }

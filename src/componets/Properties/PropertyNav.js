@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { editBoard } from '../../actions';
+import { editProperty } from '../../actions';
 
-import '../../Styles/BoardNav.css';
+import '../../Styles/PropertyNav.css';
 
 // todo: use a proper form package for this input
-const BoardNav = ({ board }) => {
+const PropertyNav = ({ property }) => {
   const dispatch = useDispatch();
-  const [titleInput, setTitleInput] = useState(board.boardTitle);
+  const [titleInput, setTitleInput] = useState(property.propertyTitle);
 
   useEffect(() => {
-    setTitleInput(board.boardTitle);
-  }, [board.boardId]);
+    setTitleInput(property.propertyTitle);
+  }, [property.propertyId]);
 
   const handleChange = (e) => {
     setTitleInput(e.target.value);
 
-    dispatch(editBoard(board.id, { boardTitle: e.target.value }));
+    dispatch(editProperty(property.id, { propertyTitle: e.target.value }));
   };
   const renderTitle = () => (
     <input
-      className="board-title"
+      className="property-title"
       type="text"
       value={titleInput}
       size={titleInput.length}
@@ -36,4 +36,4 @@ const BoardNav = ({ board }) => {
   );
 };
 
-export default BoardNav;
+export default PropertyNav;

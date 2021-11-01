@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 import history from '../../history';
 import Modal from '../Modal';
 
-import { createBoard } from '../../actions';
+import { createProperty } from '../../actions';
 
-class CreateBoard extends React.Component {
-  state = { boardName: '' };
+class PropertyCreate extends React.Component {
+  state = { propertyName: '' };
 
   handleSubmit = () => {
-    const { createBoard } = this.props;
-    const { boardName } = this.state;
+    const { createProperty } = this.props;
+    const { propertyName } = this.state;
 
-    createBoard(boardName);
+    createProperty(propertyName);
   };
 
   renderActions() {
@@ -37,7 +37,7 @@ class CreateBoard extends React.Component {
   }
 
   renderContent() {
-    const { boardName } = this.state;
+    const { propertyName } = this.state;
 
     return (
       <div className="ui form">
@@ -45,9 +45,9 @@ class CreateBoard extends React.Component {
           <label>Title</label>
           <input
             type="text"
-            placeholder="Title of your new board..."
-            value={boardName}
-            onChange={(e) => this.setState({ boardName: e.target.value })}
+            placeholder="Title of your new property..."
+            value={propertyName}
+            onChange={(e) => this.setState({ propertyName: e.target.value })}
           />
         </div>
       </div>
@@ -57,7 +57,7 @@ class CreateBoard extends React.Component {
   render() {
     return (
       <Modal
-        title="New Board"
+        title="New Property"
         content={this.renderContent()}
         actions={this.renderActions()}
         onDismiss={() => history.push('/')}
@@ -66,4 +66,4 @@ class CreateBoard extends React.Component {
   }
 }
 
-export default connect(null, { createBoard })(CreateBoard);
+export default connect(null, { createProperty })(PropertyCreate);

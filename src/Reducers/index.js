@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import AuthReducer from './AuthReducer';
-import BoardsReducer from './BoardsReducer';
-import ListsReducer from './ListsReducer';
+import PropertiesReducer from './PropertiesReducer';
+import UnitsReducer from './UnitsReducer';
 import CardsReducer from './CardsReducer';
 
 export default combineReducers({
   auth: AuthReducer,
-  boards: BoardsReducer,
-  lists: ListsReducer,
+  properties: PropertiesReducer,
+  units: UnitsReducer,
   cards: CardsReducer,
 });
