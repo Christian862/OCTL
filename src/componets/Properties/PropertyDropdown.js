@@ -3,9 +3,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import '../../Styles/BoardDropdown.css';
+import '../../Styles/PropertyDropdown.css';
 
-const BoardDropdown = ({ options }) => {
+const PropertyDropdown = ({ options }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
@@ -29,12 +29,12 @@ const BoardDropdown = ({ options }) => {
   const renderedOptions = options.map((option) => {
     return (
       <Link
-        to={`/${option.boardId}`}
+        to={`/${option.propertyId}`}
         onClick={() => setOpen(!open)}
-        key={option.boardId}
-        className="boardOption"
+        key={option.propertyId}
+        className="propertyOption"
       >
-        {option.boardTitle}
+        {option.propertyTitle}
       </Link>
     );
   });
@@ -50,7 +50,7 @@ const BoardDropdown = ({ options }) => {
         Boards
       </div>
       <div
-        id="boardDropdown"
+        id="propertyDropdown"
         className={`dropdown-content ${open ? 'show' : ''}`}
       >
         {renderedOptions}
@@ -59,4 +59,4 @@ const BoardDropdown = ({ options }) => {
   );
 };
 
-export default BoardDropdown;
+export default PropertyDropdown;

@@ -3,28 +3,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchBoards } from '../actions';
+import { fetchProperties } from '../actions';
 import GoogleAuth from './GoogleAuth';
-import BoardDropdown from './Boards/BoardDropdown';
+import PropertyDropdown from './Properties/PropertyDropdown';
 import '../Styles/MainNav.css';
 
 class MainNav extends React.Component {
   componentDidMount() {
-    this.props.fetchBoards();
+    this.props.fetchProperties();
   }
 
-  renderBoardsDropdown() {
-    if (!this.props.boards) {
+  renderPropertiesDropdown() {
+    if (!this.props.properties) {
       return <div>Loading...</div>;
     }
-    return <BoardDropdown options={this.props.boards} />;
+    return <PropertyDropdown options={this.props.properties} />;
   }
 
-  renderNewBoardButton() {
+  renderNewPropertyButton() {
     return (
       <div className="item">
-        <Link to="/board/new" className="ui button">
-          New Board
+        <Link to="/property/new" className="ui button">
+          New Property
         </Link>
       </div>
     );
@@ -33,7 +33,7 @@ class MainNav extends React.Component {
   render() {
     return (
       <div className="ui secondary menu">
-        <div className="item">{this.renderBoardsDropdown()}</div>
+        <div className="item">{this.renderPropertiesDropdown()}</div>
         <div className="item">
           <div className="ui icon input">
             <input type="text" placeholder="Search..." />
@@ -41,7 +41,7 @@ class MainNav extends React.Component {
           </div>
         </div>
         <div className="right menu">
-          {this.renderNewBoardButton()}
+          {this.renderNewPropertyButton()}
           <GoogleAuth />
         </div>
       </div>
@@ -52,6 +52,6 @@ class MainNav extends React.Component {
 const mapStateToProps = (state) =>
   // convert back to array for easy component operation
   ({
-    boards: Object.values(state.boards.byId),
+    properties: Object.values(state.properties.byId),
   });
-export default connect(mapStateToProps, { fetchBoards })(MainNav);
+export default connect(mapStateToProps, { fetchProperties })(MainNav);

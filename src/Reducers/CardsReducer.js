@@ -1,6 +1,3 @@
-// TODO: create cards reducer and handle CREATE_CARD AC.
-//
-
 import { combineReducers } from 'redux';
 import { CREATE_CARD } from '../actions/types';
 

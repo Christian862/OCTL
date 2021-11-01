@@ -1,5 +1,5 @@
 
-.board-title {
+.property-title {
   text-align: center;
   height: 36px;
   padding: 11px 21px;
@@ -12,15 +12,15 @@
   
 }
 
-.board-title:hover {
+.property-title:hover {
   background-color: #e0e1e2;
 }
 
-.board-title:focus {
+.property-title:focus {
   background-color: white;
 }
 
-.board-title::selection {
+.property-title::selection {
   background-color: rgb(160, 221, 230);
 }
 
