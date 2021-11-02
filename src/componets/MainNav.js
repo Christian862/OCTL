@@ -30,9 +30,20 @@ class MainNav extends React.Component {
     );
   }
 
+  renderPortfolioButton() {
+    return (
+      <div className="item">
+        <Link to="/" className="ui button">
+          Portfolio
+        </Link>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="ui secondary menu">
+        <div className="item">{this.renderPortfolioButton()}</div>
         <div className="item">{this.renderPropertiesDropdown()}</div>
         <div className="item">
           <div className="ui icon input">

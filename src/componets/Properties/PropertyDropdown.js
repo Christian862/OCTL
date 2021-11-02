@@ -47,7 +47,7 @@ const PropertyDropdown = ({ options }) => {
         }}
         className="ui button"
       >
-        Boards
+        Properties
       </div>
       <div
         id="propertyDropdown"
