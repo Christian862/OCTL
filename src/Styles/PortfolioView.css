@@ -1,0 +1,18 @@
+
+
+.portfolio-view-container {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-gap: 1em;
+    grid-auto-rows: 150px;
+}
+
+.portfolio-view-container > div {
+    background: #eee;
+    padding: 1em;
+}
+
+.portfolio-view-container > div:nth-child(odd) {
+    background: #ddd;
+}
