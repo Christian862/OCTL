@@ -3,16 +3,25 @@
 .portfolio-view-container {
     padding: 1em;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-columns: repeat(auto-fit, 270px);
     grid-gap: 1em;
-    grid-auto-rows: 150px;
+    grid-auto-rows: min-content;
 }
 
-.portfolio-view-container > div {
+.portfolio-view-container > .prop-card {
     background: #eee;
-    padding: 1em;
 }
 
-.portfolio-view-container > div:nth-child(odd) {
+.truncate-box {
+    overflow: hidden;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.portfolio-view-container > .prop-card:nth-child(odd) {
     background: #ddd;
 }
