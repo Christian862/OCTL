@@ -16,6 +16,12 @@ class PortfolioView extends React.Component {
     this.props.fetchUnits();
   }
 
+  componentDidUpdate() {
+    if (!this.state.selectedProperty) {
+      this.setSelectedProperty(this.props.properties[0]);
+    }
+  }
+
   setSelectedProperty = (prop) => {
     this.setState({ selectedProperty: prop });
   };
