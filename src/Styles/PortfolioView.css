@@ -1,14 +1,32 @@
 
-
 .portfolio-view-container {
+    display: flex;
+    width: 100%;
+}
+.portfolio-grid {
     padding: 1em;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 270px);
+    max-width: 50%;
+    grid-template-columns: repeat(auto-fit, 20rem);
     grid-gap: 1em;
     grid-auto-rows: min-content;
 }
 
-.portfolio-view-container > .prop-card {
+
+.selected-property-container {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    padding: 1em 1em 1em 0;
+}
+.selected-property {
+    padding: 1em;
+    background: #eee;
+    border-radius: 4px;
+    box-shadow: #8a8a8a;
+}
+
+.portfolio-grid > .prop-card {
     background: #eee;
 }
 
@@ -22,6 +40,8 @@
     text-overflow: ellipsis;
 }
 
-.portfolio-view-container > .prop-card:nth-child(odd) {
+.portfolio-grid > .prop-card:nth-child(odd) {
     background: #ddd;
 }
+
+
