@@ -7,21 +7,29 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { fetchUnits } from '../../actions';
 
 class PortfolioView extends React.Component {
-  // TODO: Change to store slice
   state = { selectedProperty: null };
+
+  componentDidMount() {
+    this.props.fetchUnits();
+  }
 
   setSelectedProperty = (prop) => {
     this.setState({ selectedProperty: prop });
   };
 
-  displayUnits = (units) =>
-    units.map((unit, index) => (
-      <p key={unit}>
-        {index + 1}. {unit}
+  displayUnits = (propertyUnitIds) => {
+    const units = this.props.allUnits.filter(
+      (unit) => propertyUnitIds.indexOf(unit.unitId) !== -1
+    );
+    return units.map((unit, index) => (
+      <p key={unit.unitId}>
+        {index + 1}. {unit.unitTitle}
       </p>
     ));
+  };
 
   showPropertyDetails = () => {
     const property = this.state.selectedProperty;
@@ -40,7 +48,6 @@ class PortfolioView extends React.Component {
             perferendis, sapiente totam unde!
           </Typography>
           <Typography variant="subtitle2" gutterBottom component="div">
-            {/* {property.units.map((unit) => unit)} */}
             {this.displayUnits(property.units)}
           </Typography>
         </div>
@@ -80,7 +87,6 @@ class PortfolioView extends React.Component {
     return (
       <div className="portfolio-view-container">
         <div className="portfolio-grid">{this.renderProperties()}</div>
-        {/* Details pane needs to be a grid item that spans 2 or 3 colums - grid area maybe */}
         {this.state.selectedProperty ? this.showPropertyDetails() : null}
       </div>
     );
@@ -89,5 +95,6 @@ class PortfolioView extends React.Component {
 
 const mapStateToProps = (state) => ({
   properties: Object.values(state.properties.byId),
+  allUnits: Object.values(state.units.byId),
 });
-export default connect(mapStateToProps, null)(PortfolioView);
+export default connect(mapStateToProps, { fetchUnits })(PortfolioView);

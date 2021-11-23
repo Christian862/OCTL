@@ -10,6 +10,7 @@ import {
   EDIT_PROPERTY,
   CREATE_UNIT,
   FETCH_UNIT,
+  FETCH_UNITS,
   EDIT_UNIT,
 } from './types';
 import properties from '../apis/properties';
@@ -81,6 +82,14 @@ export const createUnit = (title, propertyId) => {
     });
 
     dispatch({ type: CREATE_UNIT, payload: response.data, propertyId });
+  };
+};
+
+export const fetchUnits = () => {
+  return async (dispatch) => {
+    const response = await properties.get('/units');
+
+    dispatch({ type: FETCH_UNITS, payload: response.data });
   };
 };
 
